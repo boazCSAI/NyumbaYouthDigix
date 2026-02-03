@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="sw">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chagua Aina ya Nyumba | Singida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+      }
+
+      header {
+        background: #2c7be5;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+      }
+
+      .category-card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px 15px;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        color: #333;
+        transition: transform 0.2s;
+      }
+
+      .category-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h2>Unatafuta Nini?</h2>
+      <p>Chagua aina ya nyumba au fremu</p>
+    </header>
+
+    <div class="container">
+      <div class="category-grid">
+        <a href="street.html?type=residential" class="category-card">
+          <div class="icon">🏠</div>
+          <div class="title">Nyumba za Kuishi</div>
+        </a>
+
+        <a href="street.html?type=room" class="category-card">
+          <div class="icon">🛏</div>
+          <div class="title">Vyumba</div>
+        </a>
+
+        <a href="street.html?type=apartment" class="category-card">
+          <div class="icon">🏢</div>
+          <div class="title">Apartment</div>
+        </a>
+
+        <a href="street.html?type=business" class="category-card">
+          <div class="icon">🏪</div>
+          <div class="title">Fremu za Biashara</div>
+        </a>
+
+        <a href="street.html?type=shop" class="category-card">
+          <div class="icon">🏬</div>
+          <div class="title">Maduka</div>
+        </a>
+      </div>
+    </div>
+
+    <footer>© 2026 | Nyumba Bila Dalali – Singida</footer>
+  </body>
+</html>

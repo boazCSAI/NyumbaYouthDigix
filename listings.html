@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="sw">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nyumba Zinazopatikana | Singida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      header {
+        background-color: #2c7be5;
+        color: white;
+        padding: 16px;
+        text-align: center;
+      }
+
+      .container {
+        padding: 15px;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      .street-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #333;
+        text-align: center;
+      }
+
+      .house-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 15px;
+      }
+
+      .house-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .house-info {
+        padding: 12px;
+      }
+
+      .price {
+        color: #2c7be5;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .area {
+        color: #555;
+        margin: 5px 0;
+      }
+
+      .type {
+        font-size: 14px;
+        background: #eee;
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+
+      .contact-btn {
+        display: block;
+        text-align: center;
+        background: #25d366;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      #noHouses {
+        display: none;
+        color: #777;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      #successMessage {
+        display: none;
+        color: green;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h2>Nyumba Zinazopatikana</h2>
+      <p>Bila dalali • Wasiliana moja kwa moja</p>
+    </header>
+
+    <div class="container">
+      <div class="street-title" id="streetTitle"></div>
+      <p id="successMessage">✅ Nyumba yako imetumwa kikamilifu!</p>
+      <p id="noHouses">Hakuna nyumba zilizopo kwa mtaa huu bado.</p>
+      <div class="house-grid" id="houseList"></div>
+    </div>
+
+    <script>
+      // === FAKE DATABASE (Default Houses) ===
+      let houses = [
+        {
+          street: "Mitunduruni",
+          price: 40000,
+          type: "Chumba kimoja",
+          contact: "255712345678",
+          contactType: "whatsapp",
+        },
+        {
+          street: "Unyambwa",
+          price: 55000,
+          type: "Self-contained",
+          contact: "0712345678",
+          contactType: "call",
+        },
+        {
+          street: "Mitunduruni",
+          price: 70000,
+          type: "Fremu ya Biashara",
+          contact: "255764213458",
+          contactType: "whatsapp",
+        },
+      ];
+
+      // === READ SUBMITTED HOUSES FROM LOCALSTORAGE ===
+      const storedHouses = JSON.parse(
+        localStorage.getItem("submittedHouses") || "[]",
+      );
+      houses = houses.concat(storedHouses);
+
+      // === GET URL PARAMETERS ===
+      const params = new URLSearchParams(window.location.search);
+      const streetParam = params.get("street");
+      const showSuccess = params.get("success");
+
+      const title = document.getElementById("streetTitle");
+      const houseList = document.getElementById("houseList");
+      const noHouses = document.getElementById("noHouses");
+      const successMessage = document.getElementById("successMessage");
+
+      if (showSuccess === "1") {
+        successMessage.style.display = "block";
+      }
+
+      title.textContent = streetParam
+        ? `Nyumba zilizopo ${streetParam}`
+        : "Nyumba zote zilizopo Singida";
+
+      let visibleCount = 0;
+
+      houses.forEach((house) => {
+        if (
+          streetParam &&
+          house.street.toLowerCase() !== streetParam.toLowerCase()
+        ) {
+          return;
+        }
+        visibleCount++;
+
+        const contactLink =
+          house.contactType === "whatsapp"
+            ? `https://wa.me/${house.contact}`
+            : `tel:${house.contact}`;
+
+        const card = document.createElement("div");
+        card.className = "house-card";
+        card.innerHTML = `
+        <div class="house-info">
+          <div class="price">TZS ${house.price.toLocaleString()} / mwezi</div>
+          <div class="area">📍 ${house.street}</div>
+          <div class="type">${house.type}</div>
+          <a class="contact-btn" href="${contactLink}">
+            ${house.contactType === "whatsapp" ? "WhatsApp" : "Piga"} Mwenye Nyumba
+          </a>
+        </div>
+      `;
+        houseList.appendChild(card);
+      });
+
+      if (visibleCount === 0) {
+        noHouses.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

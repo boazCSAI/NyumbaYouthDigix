@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="sw">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chagua Mtaa | Singida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      header {
+        background-color: #2c7be5;
+        color: white;
+        padding: 16px;
+        text-align: center;
+      }
+
+      header h2 {
+        margin: 0;
+      }
+
+      .container {
+        padding: 15px;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .search-box {
+        margin-bottom: 15px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      .street-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+      }
+
+      .street-card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        color: #2c7be5;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        transition: transform 0.1s ease;
+      }
+
+      .street-card:hover {
+        transform: scale(1.03);
+        background-color: #eef4ff;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h2>Chagua Mtaa – Singida Mjini</h2>
+      <p>Chagua eneo unalotaka kupanga</p>
+    </header>
+
+    <div class="container">
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="🔍 Tafuta jina la mtaa..."
+          onkeyup="filterStreets(this.value)"
+        />
+      </div>
+
+      <div class="street-grid" id="streetList">
+        <!-- SAMPLE STREETS -->
+      </div>
+    </div>
+
+    <footer>Chagua mtaa • Angalia nyumba • Wasiliana moja kwa moja</footer>
+
+    <script>
+      const streets = [
+        "Mitunduruni",
+        "Mitunduruni A",
+        "Mitunduruni B",
+        "Unyambwa",
+        "Misuna",
+        "Mandewa",
+        "Ipembe",
+        "Majengo",
+        "Minga",
+        "Utemini",
+        "Mtipa",
+        "Unyianga",
+        "Kisaki",
+        "Ititi",
+        "Manguanjuki",
+        "Mungumaji",
+        "Mwankoko",
+        "Ughaugha",
+        "Uhamaka",
+        "Unyamikumbi A",
+        "Unyamikumbi B",
+        "Mtamaa A",
+        "Mtamaa B",
+        // 👉 continue adding mpaka 53
+      ];
+
+      const streetList = document.getElementById("streetList");
+
+      function renderStreets(list) {
+        streetList.innerHTML = "";
+        list.forEach((street) => {
+          const a = document.createElement("a");
+          a.className = "street-card";
+          a.href = `listings.html?street=${encodeURIComponent(
+            street.toLowerCase().replace(/\s+/g, "-"),
+          )}`;
+          a.textContent = street;
+          streetList.appendChild(a);
+        });
+      }
+
+      function filterStreets(query) {
+        const filtered = streets.filter((street) =>
+          street.toLowerCase().includes(query.toLowerCase()),
+        );
+        renderStreets(filtered);
+      }
+
+      // Initial load
+      renderStreets(streets);
+    </script>
+  </body>
+</html>

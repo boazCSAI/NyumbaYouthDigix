@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="sw">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weka Nyumba | Nyumba Bila Dalali</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      header {
+        background-color: #1f5fc4;
+        color: white;
+        padding: 16px;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      .submit-btn {
+        margin-top: 20px;
+        width: 100%;
+        padding: 15px;
+        background-color: #2c7be5;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .submit-btn:hover {
+        background-color: #1f5fc4;
+      }
+
+      .note {
+        font-size: 14px;
+        color: #666;
+        margin-top: 15px;
+        text-align: center;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 13px;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h2>🟢 Weka Nyumba Yako – Bure</h2>
+      <p>Hakuna udalali • Wapangaji wanakupata moja kwa moja</p>
+    </header>
+
+    <div class="container">
+      <div class="card">
+        <h2>Maelezo ya Nyumba</h2>
+
+        <!-- FORM START -->
+        <form id="addHouseForm">
+          <label>Aina ya Nyumba</label>
+          <select name="type" required>
+            <option value="">Chagua Aina</option>
+            <option value="Chumba kimoja">Chumba kimoja</option>
+            <option value="Vyumba viwili">Vyumba viwili</option>
+            <option value="Self-contained">Self-contained</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Fremu ya Biashara">Fremu ya Biashara</option>
+          </select>
+
+          <label>Mtaa</label>
+          <select name="street" required>
+            <option value="">Chagua Mtaa</option>
+            <option value="Mitunduruni">Mitunduruni</option>
+            <option value="Unyambwa">Unyambwa</option>
+            <option value="Misuna">Misuna</option>
+            <option value="Mandewa">Mandewa</option>
+            <option value="Majengo">Majengo</option>
+            <option value="Ipembe">Ipembe</option>
+          </select>
+
+          <label>Bei kwa Mwezi (TZS)</label>
+          <input
+            type="number"
+            name="price"
+            placeholder="Mfano: 40000"
+            required
+          />
+
+          <label>Maelezo ya Ziada (hiari)</label>
+          <textarea
+            name="notes"
+            rows="3"
+            placeholder="Mfano: Maji yapo, umeme upo, parking..."
+          ></textarea>
+
+          <label>Namba ya Simu / WhatsApp</label>
+          <input
+            type="tel"
+            name="contact"
+            placeholder="Mfano: 0712345678"
+            required
+          />
+
+          <button class="submit-btn" type="submit">📤 Tuma Nyumba</button>
+        </form>
+        <!-- FORM END -->
+
+        <p class="note">
+          Kwa kubonyeza “Tuma Nyumba”, unaruhusu wapangaji kuwasiliana nawe moja
+          kwa moja.
+        </p>
+      </div>
+
+      <footer>Nyumba Bila Dalali · Singida Mjini</footer>
+    </div>
+
+    <script>
+      document
+        .getElementById("addHouseForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Collect form values
+          const type = this.type.value;
+          const street = this.street.value;
+          const price = parseInt(this.price.value);
+          const notes = this.notes.value;
+          const contact = this.contact.value;
+
+          // Load submitted houses from localStorage or initialize
+          const submittedHouses = JSON.parse(
+            localStorage.getItem("submittedHouses") || "[]",
+          );
+
+          // Add new house
+          submittedHouses.push({
+            type,
+            street,
+            price,
+            notes,
+            contact,
+            contactType: "whatsapp", // default, could be extended
+          });
+
+          // Save back to localStorage
+          localStorage.setItem(
+            "submittedHouses",
+            JSON.stringify(submittedHouses),
+          );
+
+          // Redirect to listings.html with street filter & success message
+          window.location.href =
+            "listings.html?street=" + encodeURIComponent(street) + "&success=1";
+        });
+    </script>
+  </body>
+</html>

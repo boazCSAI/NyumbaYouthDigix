@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="sw">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nyumba Bila Dalali | Singida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .top-header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background: #1f5fc4;
+        color: white;
+        text-align: center;
+        padding: 12px 10px;
+        font-size: 15px;
+        font-weight: bold;
+        overflow: hidden;
+      }
+
+      #moving-text {
+        display: inline-block;
+        animation: fadeSlide 3s ease-in-out;
+      }
+
+      @keyframes fadeSlide {
+        0% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        20% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+      }
+
+      .card {
+        background: white;
+        padding: 30px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+      }
+
+      h1 {
+        margin-top: 0;
+        color: #2c7be5;
+      }
+
+      p {
+        color: #555;
+        margin-bottom: 25px;
+        font-size: 16px;
+      }
+
+      .btn {
+        display: block;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+      }
+
+      .btn-search {
+        background-color: #2c7be5;
+      }
+
+      .btn-search:hover {
+        background-color: #1f5fc4;
+      }
+
+      .btn-post {
+        background-color: #25d366;
+      }
+
+      .btn-post:hover {
+        background-color: #1ebe5d;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="top-header">
+      <span id="moving-text">Epuka dalali, okoa pesa zako</span>
+    </div>
+
+    <div class="card">
+      <h1>Nyumba Bila Dalali</h1>
+      <p>Chagua unachotaka kufanya 👇</p>
+
+      <a href="categories.html" class="btn btn-search">
+        🔵 NATAFUTA NYUMBA / CHUMBA
+      </a>
+
+      <a href="add-house.html" class="btn btn-post">
+        🟢 NINA NYUMBA YA KUPANGISHA
+      </a>
+
+      <footer>Singida Mjini · Haraka · Bila Dalali</footer>
+    </div>
+  </body>
+  <script>
+    const messages = [
+      "Epuka dalali, okoa pesa zako",
+      "Wasiliana moja kwa moja na mwenye nyumba",
+      "Tafuta nyumba haraka Singida",
+      "Hakuna udalali • Hakuna stress",
+      "Nyumba halisi kutoka kwa wenyewe",
+    ];
+
+    let index = 0;
+    const textElement = document.getElementById("moving-text");
+
+    setInterval(() => {
+      index = (index + 1) % messages.length;
+      textElement.textContent = messages[index];
+      textElement.style.animation = "none";
+      void textElement.offsetWidth; // reset animation
+      textElement.style.animation = "fadeSlide 3s ease-in-out";
+    }, 3000);
+  </script>
+</html>
