@@ -134,6 +134,15 @@
       .assistant-whatsapp {
         background-color: #25d366;
       }
+
+      /* === VISIBLE NUMBER STYLE === */
+      .assistant-number {
+        font-size: 20px;
+        color: #333;
+        margin: 8px 0;
+        user-select: all; /* makes it easy to copy */
+        font-weight: bold;
+      }
     </style>
   </head>
 
@@ -153,6 +162,10 @@
         Ni msaidizi wa tovuti kwa maelekezo na msaada wa kutumia mfumo.
       </p>
 
+      <!-- ✅ VISIBLE & COPYABLE NUMBER -->
+      <p class="assistant-number">📞 255 712 345 678</p>
+      <p style="font-size:13px; color:#666;">(Bonyeza na ushike kunakili namba)</p>
+
       <a href="tel:255712345678" class="assistant-call">📞 Piga Simu</a>
       <a href="https://wa.me/255712345678" class="assistant-whatsapp">
         💬 WhatsApp
@@ -169,47 +182,15 @@
     <script>
       // === FAKE DATABASE (Default Houses) ===
       let houses = [
-        {
-          street: "Mitunduruni",
-          price: 40000,
-          type: "Chumba kimoja",
-          contact: "255712345678",
-          contactType: "whatsapp",
-        },
-        {
-          street: "Unyambwa",
-          price: 55000,
-          type: "Self-contained",
-          contact: "0712345678",
-          contactType: "call",
-        },
-        {
-          street: "Mitunduruni",
-          price: 70000,
-          type: "Fremu ya Biashara",
-          contact: "255764213458",
-          contactType: "whatsapp",
-        },
-        {
-          street: "Kindai",
-          price: 30000,
-          type: "Chumba kimoja",
-          contact: "0685295993",
-          contactType: "whatsapp",
-        },
-        {
-          street: "Karakana",
-          price: 30000,
-          type: "Chumba kimoja",
-          contact: "255628618700",
-          contactType: "whatsapp",
-        },
+        { street: "Mitunduruni", price: 40000, type: "Chumba kimoja", contact: "255712345678", contactType: "whatsapp" },
+        { street: "Unyambwa", price: 55000, type: "Self-contained", contact: "0712345678", contactType: "call" },
+        { street: "Mitunduruni", price: 70000, type: "Fremu ya Biashara", contact: "255764213458", contactType: "whatsapp" },
+        { street: "Kindai", price: 30000, type: "Chumba kimoja", contact: "0685295993", contactType: "whatsapp" },
+        { street: "Karakana", price: 30000, type: "Chumba kimoja", contact: "255628618700", contactType: "whatsapp" },
       ];
 
       // === READ SUBMITTED HOUSES FROM LOCALSTORAGE ===
-      const storedHouses = JSON.parse(
-        localStorage.getItem("submittedHouses") || "[]"
-      );
+      const storedHouses = JSON.parse(localStorage.getItem("submittedHouses") || "[]");
       houses = houses.concat(storedHouses);
 
       // === GET URL PARAMETERS ===
@@ -233,19 +214,15 @@
       let visibleCount = 0;
 
       houses.forEach((house) => {
-        if (
-          streetParam &&
-          house.street.toLowerCase() !== streetParam.toLowerCase()
-        ) {
+        if (streetParam && house.street.toLowerCase() !== streetParam.toLowerCase()) {
           return;
         }
 
         visibleCount++;
 
-        const contactLink =
-          house.contactType === "whatsapp"
-            ? `https://wa.me/${house.contact}`
-            : `tel:${house.contact}`;
+        const contactLink = house.contactType === "whatsapp"
+          ? `https://wa.me/${house.contact}`
+          : `tel:${house.contact}`;
 
         const card = document.createElement("div");
         card.className = "house-card";
