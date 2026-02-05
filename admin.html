@@ -133,9 +133,9 @@
   function searchComments() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const filtered = allComments.filter(c =>
-      c.name.toLowerCase().includes(query) ||
-      c.email.toLowerCase().includes(query) ||
-      c.message.toLowerCase().includes(query)
+      c[0].toLowerCase().includes(query) ||
+      c[1].toLowerCase().includes(query) ||
+      c[2].toLowerCase().includes(query)
     );
     displayComments(filtered);
   }
