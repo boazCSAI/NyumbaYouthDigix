@@ -16,23 +16,40 @@
         height: 100vh;
       }
 
-      .top-header {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        background: #1f5fc4;
-        color: white;
-        text-align: center;
-        padding: 12px 10px;
-        font-size: 15px;
-        font-weight: bold;
-        overflow: hidden;
-      }
+    .top-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: #1f5fc4;
+  color: white;
+  text-align: center;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: bold;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between; /* space between text and button */
+  align-items: center;
+}
 
       #moving-text {
         display: inline-block;
         animation: fadeSlide 3s ease-in-out;
       }
+      .btn-admin {
+  background-color: #ff6b6b;
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.btn-admin:hover {
+  background-color: #e55b5b;
+}
+
 
       @keyframes fadeSlide {
         0% {
@@ -110,6 +127,7 @@
 
   <body>
     <div class="top-header">
+       <a href="admin.html" class="btn-admin">ADMIN PANEL</a>
       <span id="moving-text">Epuka dalali, okoa pesa zako</span>
     </div>
 
