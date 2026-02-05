@@ -96,7 +96,7 @@
 
   async function loadComments() {
     try {
-      const response = await fetch('https://your-backend-url.com/feedback'); // <-- your Flask API endpoint
+      const response = await fetch('https://backend-nyumba.onrender.com/feedback'); // <-- your Flask API endpoint
       allComments = await response.json();
 
       displayComments(allComments);
